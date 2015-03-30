@@ -7,4 +7,5 @@ Route::get('logout', array('as'=>'logout', 'uses'=>'UsersController@get_logout')
 
 Route::post('register', array('before'=>'csrf', 'uses'=>'UsersController@post_create'));
 Route::post('login', array('before'=>'csrf', 'uses'=>'UsersController@post_login'));
+
 Route::get('home',array('as'=>'home', 'uses'=>'QuestionsController@get_index'));
