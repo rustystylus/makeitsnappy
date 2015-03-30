@@ -21,10 +21,42 @@ class UsersController extends BaseController{
 				'password'=>Hash::make(Input::get('password'))
 			));
 
-			return Redirect::to('home')->with('message', 'Thanks for registering');
+			$user = User::whereUsername(Input::get('username'))->first();
+			Auth::login($user);
+
+			return Redirect::to('home')->with('message', 'Thanks for registering. You are now logged in');
 
 		}else{
 			return Redirect::to('register')->withErrors($validation)->withInput();
+		}
+	}
+
+	public function get_login() {
+		return View::make('users.login')
+				->with('title', 'Make it snappy Q&A - Login');
+	}
+
+	public function post_login() {
+		$user = array(
+			'username'=>Input::get('username'),
+			'password'=>Input::get('password')
+		);
+
+		if(Auth::attempt($user)) {
+			return Redirect::to('home')->with('message', 'You are logged in!');
+		} else	{
+			return Redirect::to('login')->with('message', 'Your username/password combination was incorrect')
+												->with_input();
+		}
+		
+	}
+
+	public function get_logout() {
+		if(Auth::check()) {
+			Auth::logout();
+			return Redirect::to('login')->with('message', 'You are now logged out!');
+		} else {
+			return Redirect::to('home');
 		}
 	}
 }

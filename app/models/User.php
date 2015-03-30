@@ -15,7 +15,8 @@ class User extends Basemodel implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-protected $fillable = array('username',  'password');
+	
+	protected $fillable = array('username',  'password');
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *

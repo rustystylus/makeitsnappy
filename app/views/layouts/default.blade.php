@@ -14,8 +14,12 @@
 		<div id="nav">
 			<ul>
 				<li>{{ HTML::linkRoute('home', 'Home')}}</li>
-				<li>{{ HTML::linkRoute('register', 'Register')}}</li>
-				<li>{{ HTML::link('/', 'Login')}}</li>
+				@if(!Auth::check())
+					<li>{{ HTML::linkRoute('register', 'Register')}}</li>
+					<li>{{ HTML::linkRoute('login', 'Login')}}</li>
+				@else
+					<li>{{ HTML::linkRoute('logout', 'Logout('.Auth::user()->username.')')}}</li>
+				@endif
 			</ul>
 		</div><!-- end nav -->
 
