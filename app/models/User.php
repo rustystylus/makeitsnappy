@@ -30,4 +30,8 @@ class User extends Basemodel implements UserInterface, RemindableInterface {
 		'password_confirmation'=>'required|alpha_num|between:4,8'
 	);
 
+	public function questions() {
+		return $this->has_many('Question');
+	}
+
 }

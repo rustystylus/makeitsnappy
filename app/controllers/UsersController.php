@@ -3,7 +3,9 @@
 class UsersController extends BaseController{
 
 	public $restful = true;
+	
 	//protected $hidden = array('password', 'remember_token');
+	
 	public function get_new() 
 	{
 		return View::make('users.new')
